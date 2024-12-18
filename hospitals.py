@@ -15,13 +15,11 @@ class Space():
     def output_heatmap(self):
         heatmap = np.zeros((self.height, self.width))
 
-        # Compute Manhattan distances for all grid cells
         for row in range(self.height):
             for col in range(self.width):
-                total_distance = sum(
-                    abs(row - house_row) + abs(col - house_col)
-                    for house_row, house_col in self.houses
-                )
+                total_distance = 0
+                for house_row, house_col in self.houses:
+                    total_distance += abs(row - house_row) + abs(col - house_col)
                 heatmap[row, col] = total_distance
 
         plt.figure(figsize=(12, 7))
